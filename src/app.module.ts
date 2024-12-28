@@ -2,14 +2,21 @@ import { Module, OnModuleInit } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './service/users/users.module';
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule,ConfigService } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose';
-import { Connection } from 'mongoose';
+
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://127.0.0.1:27017/nest_test'),
-    ConfigModule.forRoot({
-    isGlobal : true
+  imports: [ConfigModule.forRoot({
+    isGlobal : true,
+    envFilePath : '.env'
+  }),
+  MongooseModule.forRootAsync({
+    imports: [ConfigModule],
+    useFactory: async (configService: ConfigService) => ({
+      uri: configService.get<string>('MONGODB_URI'),
+    }),
+    inject: [ConfigService],
   }),
     UsersModule],
   controllers: [AppController],
