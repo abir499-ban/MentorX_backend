@@ -18,6 +18,9 @@ export class User{
     password : string;
 
     @Prop()
+    otp : string
+
+    @Prop()
     createdAt : Date;
 
     @Prop()

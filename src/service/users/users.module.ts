@@ -9,5 +9,6 @@ import { User, UserSchema } from 'src/model/user.schema';
   ],
   controllers: [UsersController],
   providers: [UsersService],
+  exports:[UsersService, MongooseModule]
 })
 export class UsersModule {}
