@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { OtpDTO } from './dto/otp.dto';
+import { createOTP_DtO, OtpDTO } from './dto/otp.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from 'src/model/user.schema';
 import { Model } from 'mongoose';
@@ -9,10 +9,15 @@ import {v4 as uuid} from 'uuid'
 export class OtpService {
     constructor(@InjectModel(User.name) private UserModel : Model<User>){}
 
-    async generateOTP(createOTP_DTO : OtpDTO){
-        const email = createOTP_DTO.email
+    async generateOTP(createotpDTO : OtpDTO){
+        createotpDTO =  createOTP_DtO.parse(createotpDTO)
+        const email = createotpDTO.email
         const otp = uuid();
-        const user = await this.UserModel.findOne({email : email})
-        return otp;
+        await this.UserModel.findOneAndUpdate({email : email}, {
+            $set:{
+                otp : otp,
+                otpExpiry : Date.now() + 3600000
+            }
+        })
     }
 }

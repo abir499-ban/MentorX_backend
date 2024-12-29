@@ -21,6 +21,9 @@ export class User{
     otp : string
 
     @Prop()
+    otpExpiry : Date;
+
+    @Prop()
     createdAt : Date;
 
     @Prop()

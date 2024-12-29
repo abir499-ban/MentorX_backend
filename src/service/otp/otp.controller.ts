@@ -6,13 +6,6 @@ import { createOTP_DtO, OtpDTO} from './dto/otp.dto'
 export class OtpController {
   constructor(private readonly otpService: OtpService) { }
 
-  @Post()
-  async createOTP(@Body() createOTPDTO: OtpDTO) {
-    createOTPDTO=  createOTP_DtO.parse(createOTPDTO)
-    const otp = this.otpService.generateOTP(createOTPDTO)
-    return {
-      otp : otp
-    }
-  }
+  
 
 }
