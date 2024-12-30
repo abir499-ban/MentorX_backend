@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose';
 import { OtpModule } from './service/otp/otp.module';
 import { AuthModule } from './service/auth/auth.module';
+import { MentorService } from './service/mentor/mentor.service';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -21,7 +22,8 @@ import { AuthModule } from './service/auth/auth.module';
   }),
     UsersModule,
     OtpModule,
-    AuthModule],
+    AuthModule,
+    MentorService],
   controllers: [AppController],
   providers: [AppService],
 })
