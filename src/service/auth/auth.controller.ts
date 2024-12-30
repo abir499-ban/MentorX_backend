@@ -1,6 +1,7 @@
-import { BadRequestException, Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, HttpCode, HttpStatus, Post, Get, UseGuards, Request } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDTO } from './dto/auth.dto';
+import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -17,9 +18,14 @@ export class AuthController {
     } catch (error) {
       return error
     }
-    
+  }
 
 
+
+  @UseGuards(AuthGuard)
+  @Get()
+  getProfile(@Request() req) {
+    return req.user;
   }
 
 }
