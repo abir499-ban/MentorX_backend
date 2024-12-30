@@ -2,16 +2,15 @@ import { Module, OnModuleInit } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './service/users/users.module';
-import { ConfigModule,ConfigService } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose';
 import { OtpModule } from './service/otp/otp.module';
 import { AuthModule } from './service/auth/auth.module';
 
-
 @Module({
   imports: [ConfigModule.forRoot({
-    isGlobal : true,
-    envFilePath : '.env'
+    isGlobal: true,
+    envFilePath: '.env'
   }),
   MongooseModule.forRootAsync({
     imports: [ConfigModule],

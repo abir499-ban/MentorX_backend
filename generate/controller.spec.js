@@ -3,7 +3,7 @@ import { ${Name}Controller } from './${name}.controller';
 import { ${Name}Service } from './${name}.service';
 
 describe('${Name}Controller', () => {
-  let controller: ${name}Controller;
+  let controller: ${Name}Controller;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -19,3 +19,8 @@ describe('${Name}Controller', () => {
   });
 });
 `
+
+
+module.exports = {
+  getControllerSpec
+}

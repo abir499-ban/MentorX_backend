@@ -17,3 +17,5 @@ describe('${Name}Service', () => {
   });
 });
 `
+
+module.exports = {getServiceSpec}

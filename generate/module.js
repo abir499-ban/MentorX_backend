@@ -8,3 +8,8 @@ import { ${Name}Controller } from './${name}.controller';
 })
 export class ${Name}Module {}
 `
+
+
+module.exports = {
+  getModule
+}
