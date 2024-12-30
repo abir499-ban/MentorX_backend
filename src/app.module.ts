@@ -5,6 +5,7 @@ import { UsersModule } from './service/users/users.module';
 import { ConfigModule,ConfigService } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose';
 import { OtpModule } from './service/otp/otp.module';
+import { AuthModule } from './service/auth/auth.module';
 
 
 @Module({
@@ -20,7 +21,8 @@ import { OtpModule } from './service/otp/otp.module';
     inject: [ConfigService],
   }),
     UsersModule,
-    OtpModule],
+    OtpModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
