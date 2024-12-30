@@ -25,7 +25,7 @@ export class UsersController {
       }
 
 
-      await this.usersService.createUser(createUserDTO);
+      const user = await this.usersService.createUser(createUserDTO);
 
       await this.otpService.generateOTP({ email: createUserDTO.email })
 
