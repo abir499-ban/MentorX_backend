@@ -7,7 +7,25 @@ export const createMentorDTO = z.object({
     position : z.string()
 })
 
+export const MentorMetaDataSchema = z.object({
+    bio: z.string().optional(),
+    socials: z.array(z.string()).optional(),
+    interests: z.array(z.string()).optional(),
+    work: z.array(z.string()).optional(),
+  });
+
+export const updateMentorDTO = z.object({
+    id : z.string(),
+    domain : z.string().optional(),
+    company : z.string().optional(),
+    position : z.string().optional(),
+    about : z.string().optional(),
+    metaData : MentorMetaDataSchema.optional()
+})
+
+
 
 
 
 export type  create_Mentor_Type = z.infer<typeof createMentorDTO>
+export type update_Mentor_Type = z.infer<typeof updateMentorDTO>

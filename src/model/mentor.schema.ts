@@ -7,9 +7,10 @@ export type MentorDocument = HydratedDocument<Mentor>
 @Schema()
 export class Mentor {
     @Prop({
+        type:Types.ObjectId,
         index: true,
-        trim: true,
-        ref: User.name
+        ref: User.name,
+        required:true,
     })
     userID: Types.ObjectId
 

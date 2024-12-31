@@ -1,6 +1,6 @@
-import { Controller, Body, Post, BadRequestException } from '@nestjs/common';
+import { Controller, Body, Post, BadRequestException, Patch } from '@nestjs/common';
 import { MentorService } from './mentor.service';
-import { create_Mentor_Type, createMentorDTO } from './dto/mentor.dto';
+import { create_Mentor_Type, createMentorDTO, update_Mentor_Type, updateMentorDTO } from './dto/mentor.dto';
 
 @Controller('mentor')
 export class MentorController {
@@ -13,15 +13,28 @@ export class MentorController {
       const mentor = await this.mentorService.createMentor(createMentor)
       return {
         message: 'Mentor Profile registered successfully',
-        success : true,
+        success: true,
         mentor
       }
     }
     catch (error) {
       return new BadRequestException('error Occured')
     }
+  }
 
-
+  @Patch()
+  async updateMentor(@Body() updateDTO: update_Mentor_Type) {
+    try {
+      updateDTO = updateMentorDTO.parse(updateDTO);
+      await this.mentorService.updateMentor(updateDTO)
+      return {
+        message : 'Mentor Updated',
+        success : true
+      }
+    }
+    catch (error) {
+      throw new BadRequestException(error)
+    }
 
   }
 }
