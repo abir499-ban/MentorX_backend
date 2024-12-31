@@ -1,49 +1,56 @@
-import {Schema, SchemaFactory, Prop} from '@nestjs/mongoose'
+import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose'
 import { HydratedDocument, Types } from 'mongoose'
 import { User } from './user.schema'
 
 export type MentorDocument = HydratedDocument<Mentor>
 
 @Schema()
-export class Mentor{
+export class Mentor {
     @Prop({
-        index:true,
-        trim:true,
-        ref:User.name
+        index: true,
+        trim: true,
+        ref: User.name
     })
-    userID : Types.ObjectId
+    userID: Types.ObjectId
 
     @Prop({
-        trim:true,
-        required : true,
-        index:true
+        trim: true,
+        required: true,
+        index: true
     })
-    domain : string
+    domain: string
 
     @Prop({
         required: true,
-        index : true
+        index: true
 
     })
-    company : string
+    company: string
 
     @Prop({
-        required : true
+        required: true
     })
-    position : string
+    position: string
 
     @Prop()
     about: string
 
-    @Prop()
+    @Prop({
+        type: {
+            bio: { type: String },
+            socials: { type: [String] },
+            interests: { type: [String] },
+            work: { type: [String] }
+        }
+    })
     metaData : MentorMetaData
 
     @Prop()
-    createdAt : Date;
+    createdAt: Date;
 
     @Prop()
-    updatedAt : Date;
-    
+    updatedAt: Date;
+
 }
 
 export const MentorSchema = SchemaFactory.createForClass(Mentor)
