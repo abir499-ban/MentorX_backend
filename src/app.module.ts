@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { OtpModule } from './service/otp/otp.module';
 import { AuthModule } from './service/auth/auth.module';
 import { MentorModule } from './service/mentor/mentor.module';
+import { Mentor_ServiceModule } from './service/mentor_Service/mentor_Service.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -23,7 +24,8 @@ import { MentorModule } from './service/mentor/mentor.module';
     UsersModule,
     OtpModule,
     AuthModule,
-    MentorModule],
+    MentorModule,
+    Mentor_ServiceModule],
   controllers: [AppController],
   providers: [AppService],
 })
