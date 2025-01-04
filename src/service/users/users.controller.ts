@@ -20,7 +20,7 @@ export class UsersController {
   async createUser(@Body() createUserDTO: User) {
     console.log(createUserDTO);
     try {
-      if (!createUserDTO.firstName || !createUserDTO.firstName || !createUserDTO.lastName || !createUserDTO.password) {
+      if (!createUserDTO.firstName || !createUserDTO.email || !createUserDTO.lastName || !createUserDTO.password) {
         throw new BadRequestException("Incompleete Payload")
       }
 
