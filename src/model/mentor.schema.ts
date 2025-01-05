@@ -4,7 +4,9 @@ import { User } from './user.schema'
 
 export type MentorDocument = HydratedDocument<Mentor>
 
-@Schema()
+@Schema({
+    timestamps : true
+})
 export class Mentor {
     @Prop({
         type:Types.ObjectId,
@@ -45,12 +47,6 @@ export class Mentor {
         }
     })
     metaData : MentorMetaData
-
-    @Prop()
-    createdAt: Date;
-
-    @Prop()
-    updatedAt: Date;
 
 }
 

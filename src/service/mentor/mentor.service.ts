@@ -10,13 +10,10 @@ export class MentorService {
     constructor(@InjectModel(Mentor.name) private MentorModel : Model<Mentor>){}
 
 
-    async createMentor(createMentor : create_Mentor_Type){
-        const mentor = new this.MentorModel({
-            ...createMentor,
-            createdAt:Date.now(),
-            updatedAt : Date.now()
-            
-        })
+    async createMentor(createMentor : Mentor){
+        const mentor = new this.MentorModel(
+            createMentor,
+        )
 
         await mentor.save()
         return mentor;

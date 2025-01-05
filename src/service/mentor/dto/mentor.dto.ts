@@ -1,7 +1,7 @@
 import {z} from 'zod'
 
 export const createMentorDTO = z.object({
-    userID : z.string(),
+    userID : z.string().regex(/^[0-9a-fA-F]{24}$/),
     domain : z.string(),
     company : z.string(),
     position : z.string()
