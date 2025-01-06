@@ -37,7 +37,7 @@ export class MentorService {
     }
 
     async findMentor(id : string){
-        const mentor = await this.MentorModel.findOne({userID : id})
+        const mentor = await this.MentorModel.findById(id)
         return mentor
     }
 
