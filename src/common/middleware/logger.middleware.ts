@@ -1,5 +1,5 @@
 
-import { BadRequestException, Injectable, NestMiddleware } from '@nestjs/common';
+import { BadRequestException, Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import { extractToken } from 'src/lib/extractToken';
 
@@ -10,7 +10,7 @@ export class LoggerMiddleware implements NestMiddleware {
     const Requestheader = req.headers;
     const token = await extractToken(Requestheader);
     if(!token){
-        throw new BadRequestException('Not Authorized')
+        throw new UnauthorizedException()
     }
     next();
   }
