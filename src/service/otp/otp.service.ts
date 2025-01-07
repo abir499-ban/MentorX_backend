@@ -29,10 +29,9 @@ export class OtpService {
     async verifyOTP(verifyOTPdto: Otp_verifyDTO) {
         const email = verifyOTPdto.email;
         const otp = verifyOTPdto.otp;
-
         const user = (await this.UserModel.findOne({ email: email })) as User;    // tODO : Implement time checking
-        if (user.otp == otp) {   
-            await this.UserModel.updateOne({ email: email }, { $set: { otp: null } });
+        if (user.otp == otp) {
+            await this.UserModel.updateOne({ email: email }, { $set: { otp: null, isVerified:true } });
             return true;
         }
         return false;

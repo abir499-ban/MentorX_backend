@@ -24,7 +24,8 @@ export class UsersService {
             ...createUserDTO,
             password: hashedpassword,
             createdAt: Date.now(),
-            updatedAt: Date.now()
+            updatedAt: Date.now(),
+            isVerified : false
         });
         await user.save();
         return user
