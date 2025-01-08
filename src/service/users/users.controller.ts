@@ -40,6 +40,13 @@ export class UsersController {
       return new BadRequestException({ message: 'Internal server Error', success: false })
     }
   }
+
+  @Get()
+  @HttpCode(201)
+  async findUserfromToken(@Body() payload){
+    return await this.usersService.findUserfromToken(payload.token)
+  }
+  
 }
 
 

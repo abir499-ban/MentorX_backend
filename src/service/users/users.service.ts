@@ -4,11 +4,13 @@ import { Model } from 'mongoose';
 import { User } from 'src/model/user.schema';
 import { createUserDTO } from './dto/createUserDTO';
 import * as bcryptjs from 'bcrypt'
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
 
-    constructor(@InjectModel(User.name) private UserModel: Model<User>) {
+    constructor(@InjectModel(User.name) private UserModel: Model<User>,
+        private jwtService: JwtService) {
     }
 
     async createUser(createUserDTO: createUserDTO): Promise<User> {
@@ -25,16 +27,23 @@ export class UsersService {
             password: hashedpassword,
             createdAt: Date.now(),
             updatedAt: Date.now(),
-            isVerified : false
+            isVerified: false
         });
         await user.save();
         return user
     }
 
 
-    async findUser(email : string){
-        const user = await this.UserModel.findOne({email : email})
+    async findUser(email: string) {
+        const user = await this.UserModel.findOne({ email: email })
         //console.log(user)
+        return user;
+    }
+
+    async findUserfromToken(token : string){
+        const user = await this.jwtService.verifyAsync(token, {
+            secret : process.env.TOKEN_SECRET
+        })
         return user;
     }
 
