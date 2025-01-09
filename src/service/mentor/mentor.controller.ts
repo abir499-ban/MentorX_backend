@@ -23,7 +23,7 @@ export class MentorController {
       }
     }
     catch (error) {
-      return {message : error.message}
+      return new BadRequestException(error.message)
     }
   }
 

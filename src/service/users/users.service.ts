@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { BadGatewayException, BadRequestException, ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/model/user.schema';
@@ -41,6 +41,7 @@ export class UsersService {
     }
 
     async findUserfromToken(token : string){
+        if(!token) return new BadRequestException('No token')
         const user = await this.jwtService.verifyAsync(token, {
             secret : process.env.TOKEN_SECRET
         })
