@@ -41,7 +41,7 @@ export class UsersController {
     }
   }
 
-  @Get()
+  @Post('/token')
   @HttpCode(201)
   async findUserfromToken(@Body() payload){
     return await this.usersService.findUserfromToken(payload.token)
