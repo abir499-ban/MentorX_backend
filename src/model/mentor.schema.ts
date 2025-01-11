@@ -40,8 +40,10 @@ export class Mentor {
 
     @Prop({
         type: {
-            bio: { type: String },
+            linkedIn : {type : String, required : true},
+            github : {type : String},
             socials: { type: [String] },
+            bio: { type: String },
             interests: { type: [String] },
             work: { type: [String] }
         }

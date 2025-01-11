@@ -8,8 +8,10 @@ export const createMentorDTO = z.object({
 })
 
 export const MentorMetaDataSchema = z.object({
-    bio: z.string().optional(),
+    linkedIn : z.string().optional(),
+    github : z.string().optional(),
     socials: z.array(z.string()).optional(),
+    bio: z.string().optional(),
     interests: z.array(z.string()).optional(),
     work: z.array(z.string()).optional(),
   });

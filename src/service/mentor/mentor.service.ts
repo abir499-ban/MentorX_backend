@@ -11,6 +11,8 @@ export class MentorService {
 
 
     async createMentor(createMentor : Mentor){
+        const doesmentor = await this.MentorModel.findOne({userID : createMentor.userID})
+        if(doesmentor) return new BadRequestException('You are already registered as a mentor')
         const mentor = new this.MentorModel(
             createMentor,
         )

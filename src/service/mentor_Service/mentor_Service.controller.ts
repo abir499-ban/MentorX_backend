@@ -6,10 +6,15 @@ import { Mentor_Service } from 'src/model/mentor_Service.schema';
 @Controller('mentor_Service')
 export class Mentor_ServiceController {
   constructor(private readonly mentor_ServiceService: Mentor_ServiceService) {}
-
+   
+  @Get()
+  async sayHello(){
+    return 'hi'
+  }
   @Post()
   async createService(@Body() createServiceDTO : Mentor_Service) {
-    return await this.mentor_ServiceService.createService(createServiceDTO)
+    const result = await  this.mentor_ServiceService.createService(createServiceDTO)
+    return result;
   }
 
   @Get('/:id')

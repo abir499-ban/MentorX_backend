@@ -8,7 +8,7 @@ export class Mentor_ServiceService {
     constructor(@InjectModel(Mentor_Service.name) private readonly MentorServiceModel: Model<Mentor_Service>) { }
 
     async createService(createServiceDTO: Mentor_Service) {
-        await this.MentorServiceModel.create(
+        return await this.MentorServiceModel.create(
             createServiceDTO
         )
     }

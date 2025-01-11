@@ -1,6 +1,6 @@
 import { Schema, SchemaFactory,Prop } from "@nestjs/mongoose";
 import { HydratedDocument, Types } from "mongoose";
-import { Mentor } from "./mentor.schema";
+import { User } from "./user.schema";
 
 
 export type mentor_ServiceDocument = HydratedDocument<Mentor_Service>
@@ -10,13 +10,12 @@ export type mentor_ServiceDocument = HydratedDocument<Mentor_Service>
 })
 export class Mentor_Service{
     @Prop({
-        required : true,
-        index : true,
-        trim : true,
         type:Types.ObjectId,
-        ref:Mentor.name
+        index: true,
+        ref: User.name,
+        required:true,
     })
-    mentor : Types.ObjectId
+    userID : Types.ObjectId
 
 
     @Prop({
@@ -34,9 +33,6 @@ export class Mentor_Service{
 
     @Prop()
     about:string
-
-    @Prop()
-    description : string
 
     @Prop()
     cost : Number
