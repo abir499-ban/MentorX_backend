@@ -1,5 +1,6 @@
 import {Schema, SchemaFactory, Prop} from '@nestjs/mongoose'
 import { HydratedDocument } from 'mongoose'
+import { string } from 'zod';
 
 export type UserDocument = HydratedDocument<User>
 
@@ -33,6 +34,19 @@ export class User{
         type:Boolean,
     })
     isVerified : boolean
+
+    @Prop({
+        type : Number,
+        max : 10,
+        min : 7,
+    })
+    phone : number
+
+    @Prop({
+        type : string,
+        length : 4
+    })
+    graduationYear : string;
 
 }
 

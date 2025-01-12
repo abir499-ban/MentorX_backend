@@ -1,10 +1,11 @@
 import { BadGatewayException, BadRequestException, ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, sanitizeFilter } from 'mongoose';
 import { User } from 'src/model/user.schema';
 import { createUserDTO } from './dto/createUserDTO';
 import * as bcryptjs from 'bcrypt'
 import { JwtService } from '@nestjs/jwt';
+import { userSanitizer } from 'src/lib/userSantizer';
 
 @Injectable()
 export class UsersService {
@@ -36,8 +37,8 @@ export class UsersService {
 
     async findUser(email: string) {
         const user = await this.UserModel.findOne({ email: email })
-        //console.log(user)
-        return user;
+        
+        return await userSanitizer(user);
     }
 
     async findUserfromToken(token : string){
@@ -46,6 +47,11 @@ export class UsersService {
             secret : process.env.TOKEN_SECRET
         })
         return user;
+    }
+
+    async findUserByID(id : string){
+        const user=  await this.UserModel.findById(id)
+        return await userSanitizer(user)
     }
 
 }

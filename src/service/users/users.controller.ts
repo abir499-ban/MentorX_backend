@@ -1,4 +1,4 @@
-import { Controller, Body, Post, HttpCode, Get, BadRequestException } from '@nestjs/common';
+import { Controller, Body, Post, HttpCode, Get, BadRequestException, Param } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/model/user.schema';
 import { OtpService } from '../otp/otp.service';
@@ -10,10 +10,13 @@ export class UsersController {
   ) {
   }
 
-  // @Get()
-  // async sayHI(){
-  //   return 'Hello'
-  // }
+  @Get('/:id')
+  async getUser(@Param('id') id: string) {
+    const user = await this.usersService.findUserByID(id)
+    console.log(user)
+    return user
+
+  }
 
   @Post()
   @HttpCode(201)
@@ -43,10 +46,10 @@ export class UsersController {
 
   @Post('/token')
   @HttpCode(201)
-  async findUserfromToken(@Body() payload){
+  async findUserfromToken(@Body() payload) {
     return await this.usersService.findUserfromToken(payload.token)
   }
-  
+
 }
 
 
