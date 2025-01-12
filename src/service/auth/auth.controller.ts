@@ -11,6 +11,7 @@ export class AuthController {
   @Post()
 
   async login(@Body() signInDto: SignInDTO) {
+    console.log("hello rom auth")
     if (!signInDto.email || !signInDto.password) throw new BadRequestException('Incomplete Log In payload')
     try {
       const signInResult = await this.authService.signin(signInDto.email, signInDto.password)

@@ -38,7 +38,7 @@ export class UsersService {
     async findUser(email: string) {
         const user = await this.UserModel.findOne({ email: email })
         
-        return await userSanitizer(user);
+        return user
     }
 
     async findUserfromToken(token : string){
