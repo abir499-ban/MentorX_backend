@@ -36,11 +36,11 @@ export class User{
     isVerified : boolean
 
     @Prop({
-        type : Number,
-        max : 10,
+        type : String,
+        max : 12,
         min : 7,
     })
-    phone : number
+    phone : string;
 
     @Prop({
         type : string,

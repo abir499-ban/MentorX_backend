@@ -1,4 +1,4 @@
-import { Controller, Body, Post, HttpCode, Get, BadRequestException, Param } from '@nestjs/common';
+import { Controller, Body, Post, HttpCode, Get, BadRequestException, Param, Patch } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/model/user.schema';
 import { OtpService } from '../otp/otp.service';
@@ -48,6 +48,11 @@ export class UsersController {
   @HttpCode(201)
   async findUserfromToken(@Body() payload) {
     return await this.usersService.findUserfromToken(payload.token)
+  }
+
+  @Patch(':id')
+  async updateUser(@Param('id') id : string, @Body() updateUser){
+    return this.usersService.updateUser(id, updateUser)
   }
 
 }

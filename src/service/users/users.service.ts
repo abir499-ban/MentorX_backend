@@ -54,4 +54,10 @@ export class UsersService {
         return await userSanitizer(user)
     }
 
+    async updateUser(id, updateUseR){
+        return await this.UserModel.findByIdAndUpdate(id , {
+            $set : updateUseR
+        })
+    }
+
 }
